@@ -1,54 +1,62 @@
-TURN = 1;
 
-var PLAYED_CELL = new Array(9);
 
-var GAME_OVER = false;
+class TicTacToe {
 
-function cellClick(cellNumber) {
-
-    if (GAME_OVER || PLAYED_CELL[cellNumber] == 1 || PLAYED_CELL[cellNumber] == 2) {
-        return;
+    constructor(boardDivId, firstPlayer) {
+        this.boardDivId = boardDivId;
+        this.turn = firstPlayer;
+        this.playedCell = new Array(9);
+        this.gameOver = false;
     }
 
-    var cellId = "#cell-" + cellNumber;
-    var imgTag = getImgTag(TURN);
-    $(cellId).append(imgTag);
-    PLAYED_CELL[cellNumber] = TURN;
+    cellClick(cellNumber) {
 
-    GAME_OVER = checkForVictory(1) || checkForVictory(2);
+        if (this.gameOver || this.playedCell[cellNumber] == 1 || this.playedCell[cellNumber] == 2) {
+            return;
+        }
 
-    if (GAME_OVER) {
-        if (TURN == 1) {
-            alert("Player X wins!");
+        var cellId = "#" this.board"cell-" + cellNumber;
+        var imgTag = getImgTag(this.turn);
+        $(cellId).append(imgTag);
+        this.playedCell[cellNumber] = this.turn;
+
+        this.gameOver = checkForVictory(1) || checkForVictory(2);
+
+        if (this.gameOver) {
+            if (this.turn == 1) {
+                alert("Player X wins!");
+            } else {
+                alert("Player O wins!");
+            }
+        }
+
+        if (this.turn == 1) {
+            this.turn = 2;
         } else {
-            alert("Player O wins!");
+            this.turn = 1;
         }
     }
 
-    if (TURN == 1) {
-        TURN = 2;
-    } else {
-        TURN = 1;
+    getImgTag(player) {
+        var filename;
+        if (player == 1) {
+            filename = "img/player-x.png";
+        } else {
+            filename = "img/player-o.png";
+        }
+        return "<img src='" + filename + "'>";
+    }
+
+    checkForVictory(player) {
+        return (this.playedCell[0] == player && this.playedCell[1] == player && this.playedCell[2] == player) ||
+            (this.playedCell[3] == player && this.playedCell[4] == player && this.playedCell[5] == player) ||
+            (this.playedCell[6] == player && this.playedCell[7] == player && this.playedCell[8] == player) ||
+            (this.playedCell[0] == player && this.playedCell[3] == player && this.playedCell[6] == player) ||
+            (this.playedCell[1] == player && this.playedCell[4] == player && this.playedCell[7] == player) ||
+            (this.playedCell[2] == player && this.playedCell[5] == player && this.playedCell[8] == player) ||
+            (this.playedCell[0] == player && this.playedCell[4] == player && this.playedCell[8] == player) ||
+            (this.playedCell[6] == player && this.playedCell[4] == player && this.playedCell[2] == player);
     }
 }
 
-function getImgTag(player) {
-    var filename;
-    if (player == 1) {
-        filename = "img/player-x.png";
-    } else {
-        filename = "img/player-o.png";
-    }
-    return "<img src='" + filename + "'>";
-}
-
-function checkForVictory(player) {
-    return (PLAYED_CELL[0] == player && PLAYED_CELL[1] == player && PLAYED_CELL[2] == player) ||
-        (PLAYED_CELL[3] == player && PLAYED_CELL[4] == player && PLAYED_CELL[5] == player) ||
-        (PLAYED_CELL[6] == player && PLAYED_CELL[7] == player && PLAYED_CELL[8] == player) ||
-        (PLAYED_CELL[0] == player && PLAYED_CELL[3] == player && PLAYED_CELL[6] == player) ||
-        (PLAYED_CELL[1] == player && PLAYED_CELL[4] == player && PLAYED_CELL[7] == player) ||
-        (PLAYED_CELL[2] == player && PLAYED_CELL[5] == player && PLAYED_CELL[8] == player) ||
-        (PLAYED_CELL[0] == player && PLAYED_CELL[4] == player && PLAYED_CELL[8] == player) ||
-        (PLAYED_CELL[6] == player && PLAYED_CELL[4] == player && PLAYED_CELL[2] == player);
-}
+val ttt = new TicTacToe(1)
