@@ -8,9 +8,8 @@ function cellClick(cellNumber) {
         return;
     }
 
-    var cellId = "#cell-" + cellNumber;
     var imgTag = getImgTag(TURN);
-    $(cellId).append(imgTag);
+    $(".cell").eq(cellNumber).append(imgTag);
     PLAYED_CELL[cellNumber] = TURN;
     if (TURN == 1) {
         TURN = 2;
