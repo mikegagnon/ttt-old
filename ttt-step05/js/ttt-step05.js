@@ -1,9 +1,7 @@
 
-
 class TicTacToe {
 
-    constructor(boardDivId, firstPlayer) {
-        this.boardDivId = boardDivId;
+    constructor(firstPlayer) {
         this.turn = firstPlayer;
         this.playedCell = new Array(9);
         this.gameOver = false;
@@ -15,12 +13,11 @@ class TicTacToe {
             return;
         }
 
-        var cellId = "#" this.board"cell-" + cellNumber;
-        var imgTag = getImgTag(this.turn);
-        $(cellId).append(imgTag);
+        var imgTag = this.getImgTag(this.turn);
+        $(".cell").eq(cellNumber).append(imgTag);
         this.playedCell[cellNumber] = this.turn;
 
-        this.gameOver = checkForVictory(1) || checkForVictory(2);
+        this.gameOver = this.checkForVictory(1) || this.checkForVictory(2);
 
         if (this.gameOver) {
             if (this.turn == 1) {
@@ -59,4 +56,8 @@ class TicTacToe {
     }
 }
 
-val ttt = new TicTacToe(1)
+var ttt = new TicTacToe(2);
+
+function cellClick(cellNumber) {
+    ttt.cellClick(cellNumber);
+}
