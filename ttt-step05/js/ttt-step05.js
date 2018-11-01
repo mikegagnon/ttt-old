@@ -13,7 +13,7 @@ class TicTacToe {
             return;
         }
 
-        var imgTag = this.getImgTag(this.turn);
+        var imgTag = getImgTag(this.turn);
         $(".cell").eq(cellNumber).append(imgTag);
         this.playedCell[cellNumber] = this.turn;
 
@@ -34,16 +34,6 @@ class TicTacToe {
         }
     }
 
-    getImgTag(player) {
-        var filename;
-        if (player == 1) {
-            filename = "img/player-x.png";
-        } else {
-            filename = "img/player-o.png";
-        }
-        return "<img src='" + filename + "'>";
-    }
-
     checkForVictory(player) {
         return (this.playedCell[0] == player && this.playedCell[1] == player && this.playedCell[2] == player) ||
             (this.playedCell[3] == player && this.playedCell[4] == player && this.playedCell[5] == player) ||
@@ -54,6 +44,16 @@ class TicTacToe {
             (this.playedCell[0] == player && this.playedCell[4] == player && this.playedCell[8] == player) ||
             (this.playedCell[6] == player && this.playedCell[4] == player && this.playedCell[2] == player);
     }
+}
+
+function getImgTag(player) {
+    var filename;
+    if (player == 1) {
+        filename = "img/player-x.png";
+    } else {
+        filename = "img/player-o.png";
+    }
+    return "<img src='" + filename + "'>";
 }
 
 var ttt = new TicTacToe(2);
