@@ -1,9 +1,8 @@
 TURN = 1;
 
 function cellClick(cellNumber) {
-    var cellId = "#cell-" + cellNumber;
     var imgTag = getImgTag(TURN);
-    $(cellId).append(imgTag);
+    $(".cell").eq(cellNumber).append(imgTag);
     if (TURN == 1) {
         TURN = 2;
     } else {
