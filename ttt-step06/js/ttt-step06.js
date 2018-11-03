@@ -1,10 +1,34 @@
 
 class TicTacToe {
 
-    constructor(firstPlayer) {
+    constructor(firstPlayer, divId) {
+        this.divId = divId;
         this.turn = firstPlayer;
         this.playedCell = new Array(9);
         this.gameOver = false;
+
+        var innerHtml = `
+            <div class="row">
+              <div class="cell" data-cell-number="0"></div>
+              <div class="cell" data-cell-number="1"></div>
+              <div class="cell" data-cell-number="2"></div>
+            </div>
+            <div class="row">
+              <div class="cell" data-cell-number="3"></div>
+              <div class="cell" data-cell-number="4"></div>
+              <div class="cell" data-cell-number="5"></div>
+            </div>
+            <div class="row">
+              <div class="cell" data-cell-number="6"></div>
+              <div class="cell" data-cell-number="7"></div>
+              <div class="cell" data-cell-number="8"></div>
+            </div>`
+
+        var divHtml = "<div id='" + this.divId + "'>" + innerHtml + "</div>"
+        $("body").append(divHtml)
+        $("#" + this.divId + " .cell").click(this, function(event) {
+            event.data.cellClick($(this).data("cell-number"));
+        })
     }
 
     cellClick(cellNumber) {
@@ -14,7 +38,7 @@ class TicTacToe {
         }
 
         var imgTag = getImgTag(this.turn);
-        $(".cell").eq(cellNumber).append(imgTag);
+        $("#" + this.divId + " .cell").eq(cellNumber).append(imgTag);
         this.playedCell[cellNumber] = this.turn;
 
         this.gameOver = this.checkForVictory(1) || this.checkForVictory(2);
@@ -56,7 +80,8 @@ function getImgTag(player) {
     return "<img src='" + filename + "'>";
 }
 
-var ttt = new TicTacToe(2);
+var ttt1 = new TicTacToe(1, "ttt1");
+var ttt2 = new TicTacToe(2, "ttt2");
 
 function cellClick(cellNumber) {
     ttt.cellClick(cellNumber);
