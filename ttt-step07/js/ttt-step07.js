@@ -1,13 +1,14 @@
 
 class TicTacToe {
 
-    constructor(firstPlayer, divId) {
-        this.divId = divId;
+    constructor(firstPlayer) {
+        this.divId = "div" + Math.floor(Math.random() * 99999999) + 1;
         this.turn = firstPlayer;
         this.playedCell = new Array(9);
         this.gameOver = false;
 
         var innerHtml = `
+            <button class="row">Copy</button>
             <div class="row">
               <div class="cell" data-cell-number="0"></div>
               <div class="cell" data-cell-number="1"></div>
@@ -22,13 +23,37 @@ class TicTacToe {
               <div class="cell" data-cell-number="6"></div>
               <div class="cell" data-cell-number="7"></div>
               <div class="cell" data-cell-number="8"></div>
-            </div>`
+            </div>
+            <div class="row">`
+
 
         var divHtml = "<div id='" + this.divId + "'>" + innerHtml + "</div>"
         $("body").append(divHtml)
+        $("#" + this.divId + " button").click(this, function(event) {
+            //alert("Copy: " + event.data.divId);
+            var newTTT = event.data.deepCopy();
+
+        });
         $("#" + this.divId + " .cell").click(this, function(event) {
             event.data.cellClick($(this).data("cell-number"));
-        })
+        });
+    }
+
+    deepCopy() {
+        var newTTT = new TicTacToe(this.turn);
+        for (var i = 0; i < this.playedCell.length; i++) {
+            var turn = this.playedCell[i];
+            if (turn) {
+                newTTT.turn = turn;
+                newTTT.cellClick(i);
+            }
+            //newTTT.playedCell[i] = this.playedCell[i];
+
+        }
+
+        newTTT.turn = this.turn;
+
+        return newTTT;
     }
 
     cellClick(cellNumber) {
@@ -80,8 +105,8 @@ function getImgTag(player) {
     return "<img src='" + filename + "'>";
 }
 
-var ttt1 = new TicTacToe(1, "ttt1");
-var ttt2 = new TicTacToe(2, "ttt2");
+var ttt1 = new TicTacToe(1);
+//var ttt2 = new TicTacToe(2, "ttt2");
 
 function cellClick(cellNumber) {
     ttt.cellClick(cellNumber);

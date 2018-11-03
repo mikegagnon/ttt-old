@@ -3,8 +3,8 @@
 }
 
 .cell {
-    height: 100px;
-    width: 100px;
+    height: 20px;
+    width: 20px;
     margin-left: 5px;
     margin-top: 5px;
     float: left; 
@@ -13,5 +13,5 @@
 }
 
 img {
-    width: 100px;
+    width: 20px;
 }
