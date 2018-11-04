@@ -1,6 +1,7 @@
 TURN = 1;
 
-function cellClick(cellNumber) {
+function cellClick() {
+    var cellNumber = $(this).data("cell-number");
     if (TURN == 1) {
         $(".cell").eq(cellNumber).text("X");
         TURN = 2;
@@ -9,3 +10,5 @@ function cellClick(cellNumber) {
         TURN = 1;
     }
 }
+
+$(".cell").click(cellClick);
